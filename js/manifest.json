@@ -1,0 +1,105 @@
+{
+  "name": "Absolute Fansub - Animes Legendados",
+  "short_name": "Absolute",
+  "description": "Fansub dedicada a animes legendados em português. Baixe ou assista online seus títulos favoritos com qualidade.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#092635",
+  "theme_color": "#1997d3",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "anime", "media"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  
+  "icons": [
+    {
+      "src": "/img/assets/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/img/assets/loadinglogo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/assets/loadinglogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "/img/assets/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Página inicial do Absolute Fansub"
+    },
+    {
+      "src": "/img/assets/screenshot-mobile.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Versão mobile do site"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Ver Projetos",
+      "short_name": "Projetos",
+      "description": "Lista de todos os animes disponíveis",
+      "url": "/projetos.html",
+      "icons": [
+        {
+          "src": "/img/assets/icon-projetos.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Favoritos",
+      "short_name": "Favoritos",
+      "description": "Seus animes favoritos",
+      "url": "/#favorites",
+      "icons": [
+        {
+          "src": "/img/assets/icon-favoritos.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Recrutamento",
+      "short_name": "Junte-se",
+      "description": "Faça parte da equipe",
+      "url": "/recrutamento.html",
+      "icons": [
+        {
+          "src": "/img/assets/icon-recrutamento.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+
+  "share_target": {
+    "action": "/share",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+
+  "related_applications": [],
+  "prefer_related_applications": false,
+
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
+}
