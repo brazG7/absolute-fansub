@@ -1,0 +1,618 @@
+/**
+ * ABSOLUTE FANSUB - CSS DE MELHORIAS
+ * Estilos para favoritos, tema, PWA e UX improvements
+ */
+
+/* ==================== VARIÁVEIS CSS (para temas) ==================== */
+
+:root {
+    /* Tema Escuro (padrão) */
+    --bg-primary: #092635;
+    --bg-secondary: #051720;
+    --bg-tertiary: #08202c;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #9b9b9b;
+    --border-color: #214556;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --accent: #1997d3;
+    --accent-dark: #1687bb;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==================== TEMA CLARO ==================== */
+
+.theme-light {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e8e8e8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6a6a6a;
+    --border-color: #d0d0d0;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.theme-light .anime-card,
+.theme-light .post-card,
+.theme-light .bloco-episodio {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.theme-light .cabecalho {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.theme-light .botoes {
+    background-color: var(--bg-tertiary);
+}
+
+/* ==================== BOTÃO DE SCROLL TO TOP ==================== */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-5px);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* ==================== BOTÃO DE TEMA ==================== */
+
+.theme-toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.theme-toggle-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-button svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-button:hover svg {
+    transform: rotate(20deg);
+}
+
+/* ==================== SISTEMA DE FAVORITOS ==================== */
+
+/* Botão de favorito na página de anime */
+.favorite-button-container {
+    width: 100%;
+}
+
+.favorite-button {
+    width: 100%;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 8px;
+    background-color: #214556;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    flex-direction: row-reverse;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-button:hover {
+    background-color: #193a49;
+}
+
+.favorite-button.is-favorite {
+    background-color: #ff4757;
+}
+
+.favorite-button.is-favorite:hover {
+    background-color: #ff3838;
+}
+
+/* Modal de favoritos */
+.favorites-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.favorites-modal.show {
+    opacity: 1;
+}
+
+.favorites-modal-content {
+    background-color: var(--bg-secondary);
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--border-color);
+}
+
+.favorites-modal-header {
+    background-color: var(--bg-tertiary);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.favorites-modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close-favorites-modal {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-favorites-modal:hover {
+    color: var(--accent);
+}
+
+.favorites-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.favorite-card {
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+.favorite-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.favorite-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.favorite-card:hover .favorite-card-overlay {
+    opacity: 1;
+}
+
+.view-anime-btn {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.view-anime-btn:hover {
+    background-color: var(--accent-dark);
+}
+
+.favorite-card-info {
+    padding: 15px;
+}
+
+.favorite-card-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+.favorite-card-info p {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.remove-favorite-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: rgba(255, 71, 87, 0.1);
+    color: #ff4757;
+    border: 1px solid #ff4757;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-favorite-btn:hover {
+    background-color: #ff4757;
+    color: white;
+}
+
+/* ==================== NOTIFICAÇÕES ==================== */
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: 10001;
+    animation: slideIn 0.3s ease forwards;
+    border-left: 4px solid var(--accent);
+}
+
+.notification-success {
+    border-left-color: #2ecc71;
+}
+
+.notification-error {
+    border-left-color: #e74c3c;
+}
+
+.notification-warning {
+    border-left-color: #f39c12;
+}
+
+.notification-info {
+    border-left-color: var(--accent);
+}
+
+.notification-message {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.notification-close:hover {
+    color: var(--accent);
+}
+
+.notification.fade-out {
+    animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* ==================== INDICADOR OFFLINE ==================== */
+
+.offline-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff4757;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-weight: 600;
+    z-index: 9999;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.offline-indicator.show {
+    transform: translateY(0);
+}
+
+/* ==================== PWA INSTALL PROMPT ==================== */
+
+.pwa-install-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(200px);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px var(--shadow);
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 2px solid var(--border-color);
+}
+
+.pwa-install-prompt.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.pwa-install-content {
+    flex: 1;
+}
+
+.pwa-install-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.pwa-install-text {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.pwa-install-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.pwa-install-button {
+    flex: 1;
+    padding: 12px 20px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.pwa-install-button:hover {
+    background-color: var(--accent-dark);
+}
+
+.pwa-install-dismiss {
+    padding: 12px 20px;
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pwa-install-dismiss:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+/* ==================== LAZY LOADING IMAGES ==================== */
+
+img[data-src] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .favorites-modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .favorites-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .notification {
+        max-width: 90%;
+        top: 10px;
+        right: 5%;
+    }
+
+    .pwa-install-prompt {
+        max-width: 95%;
+    }
+
+    .theme-toggle-button {
+        padding: 8px;
+    }
+}
+
+/* ==================== ANIMAÇÕES DE CARREGAMENTO ==================== */
+
+.loading-skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-tertiary) 0%,
+        var(--bg-secondary) 50%,
+        var(--bg-tertiary) 100%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ==================== BREADCRUMBS ==================== */
+
+.breadcrumbs {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+    position: relative;
+    z-index: 3;
+}
+
+.breadcrumbs a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent-dark);
+    text-decoration: underline;
+}
